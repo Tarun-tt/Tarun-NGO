@@ -18,7 +18,7 @@ const navItems = [
   { label: 'About Us', path: '/about' },
   { label: 'Our Causes', path: '/causes' },
   { label: 'Our Impact', path: '/impact' },
-  { label: 'Stories', path: '/stories' },
+  { label: 'Stories & Relief', path: '/stories' },
   { label: 'Gallery', path: '/gallery' },
   { label: 'Volunteer', path: '/volunteer' },
   { label: 'Contact', path: '/contact' },

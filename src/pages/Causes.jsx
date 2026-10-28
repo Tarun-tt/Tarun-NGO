@@ -12,6 +12,7 @@ import { useDonation } from '../context/DonationContext';
 import { formatINR, calcPercentage } from '../utils/formatters';
 import { fallbackCampaigns } from '../utils/fallbackData';
 import AnimatedCounter from '../components/common/AnimatedCounter';
+import AnimatedProgressBar from '../components/common/AnimatedProgressBar';
 
 const categories = ['All', 'Education', 'Healthcare', 'Hunger Relief', 'Women Empowerment', 'Environment', 'Child Welfare'];
 
@@ -198,11 +199,14 @@ export default function Causes() {
                             Goal: <strong>{formatINR(campaign.target_amount)}</strong>
                           </Typography>
                         </Stack>
-                        <LinearProgress variant="determinate" value={percentage} />
+                        <AnimatedProgressBar value={percentage} height={8} />
                         <Stack direction="row" justifyContent="space-between" mt={0.8}>
-                          <Typography variant="caption" color="text.secondary">
-                            {percentage}% funded
-                          </Typography>
+                          <AnimatedCounter
+                            target={percentage}
+                            suffix="% funded"
+                            variant="caption"
+                            sx={{ color: '#526677', fontWeight: 600 }}
+                          />
                           <Typography variant="caption" color="text.secondary">
                             <strong><AnimatedCounter target={campaign.donor_count || 0} variant="caption" sx={{ fontWeight: 700, color: '#172B3A' }} /></strong> confirmed donors
                           </Typography>

@@ -11,49 +11,51 @@ import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import VerifiedUserRoundedIcon from '@mui/icons-material/VerifiedUserRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import AnimatedCounter from '../components/common/AnimatedCounter';
+import AnimatedProgressBar from '../components/common/AnimatedProgressBar';
+import PastFiveYearsTimeline from '../components/common/PastFiveYearsTimeline';
 
 export default function ImpactPage() {
   const metrics = [
     {
       icon: <GroupsRoundedIcon sx={{ fontSize: 28 }} />,
-      number: '50,000+',
-      title: 'Beneficiaries Reached',
-      desc: 'Direct assistance across rural and semi-urban communities in 15 states.',
+      number: '2,450+',
+      title: 'Beneficiaries Assisted',
+      desc: 'Direct grassroots assistance across rural and semi-urban communities.',
       image: './images/women-empowerment.jpg',
     },
     {
       icon: <SchoolRoundedIcon sx={{ fontSize: 28 }} />,
-      number: '200+',
-      title: 'Education Support Centers',
+      number: '420+',
+      title: 'Students in Study Centers',
       desc: 'Evening remedial learning, STEM study kits, and school supplies.',
       image: './images/education.jpg',
     },
     {
       icon: <HealthAndSafetyRoundedIcon sx={{ fontSize: 28 }} />,
-      number: '150+',
-      title: 'Mobile Healthcare Camps',
+      number: '650+',
+      title: 'Health Camp Consultations',
       desc: 'Free diagnostic checkups, maternal care, and doctor consultations.',
       image: './images/healthcare.jpg',
     },
     {
       icon: <RestaurantRoundedIcon sx={{ fontSize: 28 }} />,
-      number: '120,000+',
+      number: '4,800+',
       title: 'Nutritious Meals Served',
-      desc: 'Hot meals served through Annapoorna community kitchens.',
+      desc: 'Hot meals served through Annapoorna community kitchens and relief drives.',
       image: './images/hunger-relief.jpg',
     },
     {
       icon: <ParkRoundedIcon sx={{ fontSize: 28 }} />,
-      number: '50,000+',
+      number: '1,200+',
       title: 'Native Trees Planted',
       desc: 'Ecological restoration and groundwater rejuvenation with native saplings.',
       image: './images/environment.jpg',
     },
     {
       icon: <PublicRoundedIcon sx={{ fontSize: 28 }} />,
-      number: '15',
-      title: 'Indian States Covered',
-      desc: 'Active field projects across North, Central, and Eastern India.',
+      number: '4',
+      title: 'Active Focus States',
+      desc: 'Active field projects across Delhi-NCR, UP, Bihar, and Rajasthan.',
       image: './images/child-welfare.jpg',
     },
   ];
@@ -182,11 +184,11 @@ export default function ImpactPage() {
                         sx={{ fontWeight: 800, color: item.color }}
                       />
                     </Stack>
-                    <LinearProgress
-                      variant="determinate"
+                    <AnimatedProgressBar
                       value={item.percent}
+                      height={10}
+                      color={item.color}
                       sx={{
-                        height: 10,
                         bgcolor: '#EEF4F0',
                         '& .MuiLinearProgress-bar': { bgcolor: item.color },
                       }}
@@ -214,6 +216,11 @@ export default function ImpactPage() {
             </Grid>
           </Grid>
         </Paper>
+
+        {/* 5-Year Relief Missions Timeline */}
+        <Box sx={{ mt: 8 }}>
+          <PastFiveYearsTimeline />
+        </Box>
 
         {/* Motivating Call to Action */}
         <Paper

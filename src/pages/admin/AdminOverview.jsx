@@ -13,6 +13,7 @@ import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import { api } from '../../api/client';
 import { formatINR, formatDate, calcPercentage } from '../../utils/formatters';
 import AnimatedCounter from '../../components/common/AnimatedCounter';
+import AnimatedProgressBar from '../../components/common/AnimatedProgressBar';
 
 export default function AdminOverview() {
   const [metrics, setMetrics] = useState(null);
@@ -159,7 +160,7 @@ export default function AdminOverview() {
                         {formatINR(c.raised_amount)} / {formatINR(c.target_amount)} ({pct}%)
                       </Typography>
                     </Stack>
-                    <LinearProgress variant="determinate" value={pct} />
+                    <AnimatedProgressBar value={pct} height={6} />
                   </Box>
                 );
               })}

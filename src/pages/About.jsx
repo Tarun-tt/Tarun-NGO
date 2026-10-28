@@ -26,7 +26,7 @@ export default function About() {
                 Dedicated to Dignity, Equity, and Sustainable Progress.
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8, mb: 3 }}>
-                Helping India is an Indian public charitable trust established to bring compassionate action, transparent governance, and measurable grassroots impact to underserved communities across 15 Indian states.
+                Helping India is an Indian public charitable trust established to bring compassionate action, transparent governance, and measurable grassroots impact to underserved communities across Delhi-NCR, Uttar Pradesh, Bihar, and Rajasthan.
               </Typography>
               <Stack direction="row" spacing={2}>
                 <Button
@@ -110,10 +110,10 @@ export default function About() {
         >
           <Grid container spacing={3}>
             {[
-              { label: 'Beneficiaries Supported', value: '50,000+', suffix: '+' },
-              { label: 'Educational Programs', value: '200+', suffix: '+' },
-              { label: 'Healthcare Initiatives', value: '150+', suffix: '+' },
-              { label: 'Indian States Served', value: '15', suffix: '' },
+              { label: 'Beneficiaries Assisted', value: '2,450+', suffix: '+' },
+              { label: 'Students in Learning Centers', value: '420+', suffix: '+' },
+              { label: 'Health Camp Patients', value: '650+', suffix: '+' },
+              { label: 'Active Focus States', value: '4', suffix: '' },
             ].map((stat, i) => (
               <Grid item xs={6} md={3} key={stat.label}>
                 <Box sx={{ textAlign: 'center', borderRight: { md: i < 3 ? '1px solid #D5E8DD' : 'none' } }}>

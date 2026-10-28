@@ -170,7 +170,7 @@ export default function VolunteerPage() {
                 <Stack direction="row" spacing={3} sx={{ color: "#FFFFFF" }}>
                   <Box>
                     <AnimatedCounter
-                      target="2,400+"
+                      target="75+"
                       variant="h5"
                       sx={{ fontWeight: 800, color: "#FFFFFF" }}
                     />
@@ -183,7 +183,7 @@ export default function VolunteerPage() {
                   </Box>
                   <Box>
                     <AnimatedCounter
-                      target="15"
+                      target="4"
                       variant="h5"
                       sx={{ fontWeight: 800, color: "#FFFFFF" }}
                     />

@@ -2,6 +2,7 @@ import {
   fallbackCampaigns,
   fallbackStories,
   fallbackGallery,
+  pastFiveYearsIncidents,
 } from "../utils/fallbackData";
 
 // Client-side LocalStorage Persistence Service for Helping India NGO
@@ -471,6 +472,10 @@ export const api = {
       if (updated) setStorage(STORAGE_KEYS.GALLERY, gallery);
     }
     return gallery;
+  },
+
+  getPastFiveYearsRelief: async () => {
+    return pastFiveYearsIncidents;
   },
 
   // Admin Auth

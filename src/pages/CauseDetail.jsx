@@ -16,6 +16,7 @@ import { useDonation } from '../context/DonationContext';
 import { formatINR, formatDate, calcPercentage } from '../utils/formatters';
 import { fallbackCampaigns } from '../utils/fallbackData';
 import AnimatedCounter from '../components/common/AnimatedCounter';
+import AnimatedProgressBar from '../components/common/AnimatedProgressBar';
 
 export default function CauseDetail() {
   const { slug } = useParams();
@@ -231,7 +232,7 @@ export default function CauseDetail() {
                   raised of <strong>{formatINR(campaign.target_amount)}</strong> target
                 </Typography>
 
-                <LinearProgress variant="determinate" value={percentage} sx={{ height: 10, mb: 2 }} />
+                <AnimatedProgressBar value={percentage} height={10} sx={{ mb: 2 }} />
 
                 <Grid container spacing={2} sx={{ mb: 3 }}>
                   <Grid item xs={6}>

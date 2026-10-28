@@ -68,7 +68,7 @@ export default function Footer() {
             </Stack>
 
             <Typography variant="body2" sx={{ color: '#BACCD8', lineHeight: 1.7, mb: 3 }}>
-              Helping India is a registered Indian nonprofit public charitable trust committed to providing quality education, rural healthcare access, hunger relief, women empowerment, child welfare, and environmental protection across 15 Indian states.
+              Helping India is a registered Indian nonprofit public charitable trust committed to providing quality education, rural healthcare access, hunger relief, women empowerment, child welfare, and environmental protection across vulnerable communities in Delhi-NCR, Uttar Pradesh, Bihar, and Rajasthan.
             </Typography>
 
             <Box sx={{ p: 2, bgcolor: '#1B3145', borderRadius: 2.5, border: '1px solid #28445E' }}>
@@ -96,6 +96,9 @@ export default function Footer() {
               OUR WORK
             </Typography>
             <Stack spacing={1.5}>
+              <Typography component={RouterLink} to="/stories?category=5-Year+Relief+Missions+(2021-2026)" sx={{ color: '#FBBF24', fontWeight: 700, textDecoration: 'none', fontSize: '0.88rem', '&:hover': { color: '#FCD34D' } }}>
+                ★ 5-Year Relief (2021–2026)
+              </Typography>
               <Typography component={RouterLink} to="/causes" sx={{ color: '#A0B4C4', textDecoration: 'none', fontSize: '0.88rem', '&:hover': { color: '#34D399' } }}>
                 Education for All
               </Typography>
@@ -128,6 +131,9 @@ export default function Footer() {
               </Typography>
               <Typography component={RouterLink} to="/impact" sx={{ color: '#A0B4C4', textDecoration: 'none', fontSize: '0.88rem', '&:hover': { color: '#34D399' } }}>
                 Audited Impact
+              </Typography>
+              <Typography component={RouterLink} to="/stories?category=5-Year+Relief+Missions+(2021-2026)" sx={{ color: '#A0B4C4', textDecoration: 'none', fontSize: '0.88rem', '&:hover': { color: '#34D399' } }}>
+                5-Year Relief Missions
               </Typography>
               <Typography component={RouterLink} to="/stories" sx={{ color: '#A0B4C4', textDecoration: 'none', fontSize: '0.88rem', '&:hover': { color: '#34D399' } }}>
                 Verified Stories

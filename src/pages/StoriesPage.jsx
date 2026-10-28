@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
   Container, Box, Typography, Grid, Card, CardContent, CardMedia,
   Chip, Paper, Stack, Skeleton, Button, Tabs, Tab
@@ -11,14 +12,41 @@ import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
 import { api } from '../api/client';
 import { fallbackStories } from '../utils/fallbackData';
 import { useDonation } from '../context/DonationContext';
+import PastFiveYearsTimeline from '../components/common/PastFiveYearsTimeline';
 
-const categories = ['All', 'Emergency Relief', 'Child Welfare & Education', 'Healthcare', 'Women Empowerment', 'Hunger & Shelter', 'Environment'];
+const categories = [
+  'All',
+  '5-Year Relief Missions (2021-2026)',
+  'Emergency Financial Assistance',
+  'Disability Support',
+  'Menstrual Health Awareness',
+  'Disaster Rehabilitation',
+  'Rural Development',
+  'Mental Health Awareness',
+  'Blood Donation Awareness',
+  'Migrant Worker Support',
+  'Old-Age Support',
+  'Road Safety',
+  'Child Welfare & Education',
+  'Healthcare',
+  'Women Empowerment',
+  'Hunger & Shelter',
+  'Environment'
+];
 
 export default function StoriesPage() {
   const { openDonationModal } = useDonation();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryParam = searchParams.get('category');
   const [stories, setStories] = useState(fallbackStories);
   const [loading, setLoading] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState(categoryParam || 'All');
+
+  useEffect(() => {
+    if (categoryParam) {
+      setActiveCategory(categoryParam);
+    }
+  }, [categoryParam]);
 
   useEffect(() => {
     api.getStories()
@@ -28,6 +56,15 @@ export default function StoriesPage() {
       .catch(console.warn)
       .finally(() => setLoading(false));
   }, []);
+
+  const handleTabChange = (e, val) => {
+    setActiveCategory(val);
+    if (val === 'All') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ category: val });
+    }
+  };
 
   const safeStories = Array.isArray(stories) ? stories : fallbackStories;
   const filteredStories = activeCategory === 'All'
@@ -55,7 +92,7 @@ export default function StoriesPage() {
         <Box mb={5}>
           <Tabs
             value={activeCategory}
-            onChange={(e, val) => setActiveCategory(val)}
+            onChange={handleTabChange}
             variant="scrollable"
             scrollButtons="auto"
             sx={{
@@ -80,98 +117,115 @@ export default function StoriesPage() {
           </Tabs>
         </Box>
 
-        <Grid container spacing={4}>
-          {loading ? (
-            Array.from(new Array(3)).map((_, i) => (
-              <Grid item xs={12} key={i}>
-                <Skeleton variant="rounded" height={340} />
-              </Grid>
-            ))
-          ) : filteredStories.length === 0 ? (
-            <Grid item xs={12}>
-              <Paper sx={{ p: 6, textAlign: 'center', borderRadius: 3 }}>
-                <Typography variant="h6" color="text.secondary">
-                  No stories found for this category.
-                </Typography>
-              </Paper>
-            </Grid>
-          ) : (
-            filteredStories.map((story) => (
-              <Grid item xs={12} key={story.id}>
-                <Card sx={{ borderRadius: 4, overflow: 'hidden', border: '1px solid #DCE6E1', boxShadow: '0 8px 24px rgba(0,0,0,0.04)' }}>
-                  <Grid container>
-                    <Grid item xs={12} md={5}>
-                      <CardMedia
-                        component="img"
-                        height="100%"
-                        image={story.image_url}
-                        alt={story.title}
-                        onError={(e) => {
-                          e.currentTarget.src = './images/story-aarav.jpg';
-                        }}
-                        sx={{ minHeight: { xs: 240, md: 380 }, objectFit: 'cover' }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={7}>
-                      <CardContent sx={{ p: { xs: 3, md: 4.5 }, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                        <Stack direction="row" spacing={1.5} alignItems="center" mb={1.5} flexWrap="wrap" gap={1}>
-                          <Chip label={story.category} size="small" sx={{ bgcolor: '#E4F6ED', color: '#087A52', fontWeight: 800 }} />
-                          <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: '#657889' }}>
-                            <LocationOnRoundedIcon sx={{ fontSize: 16 }} />
-                            <Typography variant="caption" fontWeight={600}>{story.location}</Typography>
-                          </Stack>
-                          <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: '#657889' }}>
-                            <CalendarMonthRoundedIcon sx={{ fontSize: 16 }} />
-                            <Typography variant="caption" fontWeight={600}>{story.date}</Typography>
-                          </Stack>
-                        </Stack>
-
-                        <Typography variant="h4" fontWeight={800} color="#172B3A" mb={1.5} sx={{ fontSize: { xs: '1.4rem', md: '1.8rem' }, lineHeight: 1.3 }}>
-                          {story.title}
-                        </Typography>
-
-                        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8, mb: 2.5 }}>
-                          {story.content}
-                        </Typography>
-
-                        {story.quote && (
-                          <Box sx={{ p: 2, bgcolor: '#F4FAF7', borderRadius: 2.5, borderLeft: '4px solid #087A52', mb: 3 }}>
-                            <Stack direction="row" spacing={1} alignItems="flex-start">
-                              <FormatQuoteRoundedIcon sx={{ color: '#087A52', transform: 'rotate(180deg)', fontSize: 24 }} />
-                              <Box>
-                                <Typography variant="body2" sx={{ fontStyle: 'italic', color: '#172B3A', fontWeight: 500 }}>
-                                  "{story.quote}"
-                                </Typography>
-                                <Typography variant="caption" fontWeight={700} color="#087A52" sx={{ mt: 0.5, display: 'block' }}>
-                                  — {story.beneficiary_name}
-                                </Typography>
-                              </Box>
-                            </Stack>
-                          </Box>
-                        )}
-
-                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ sm: 'center' }}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            startIcon={<FavoriteRoundedIcon />}
-                            onClick={() => openDonationModal({ campaignTitle: `Support ${story.category} Initiatives`, presetAmount: 1000 })}
-                            sx={{ py: 1.2, px: 3, fontWeight: 800 }}
-                          >
-                            Help Cases Like This
-                          </Button>
-                          <Typography variant="caption" color="text.secondary">
-                            ⚡ 100% funds directed to verified field relief via <strong>tarun-tiwari@ptyes</strong>
-                          </Typography>
-                        </Stack>
-                      </CardContent>
-                    </Grid>
+        {activeCategory === '5-Year Relief Missions (2021-2026)' ? (
+          <PastFiveYearsTimeline
+            title="Chronicle of Compassion: 5-Year Relief Missions (2021–2026)"
+            subtitle="Documented accounts of how Helping India mobilized on-ground relief squads across India's largest floods, heatwaves, landslides, and humanitarian emergencies."
+          />
+        ) : (
+          <>
+            <Grid container spacing={4}>
+              {loading ? (
+                Array.from(new Array(3)).map((_, i) => (
+                  <Grid item xs={12} key={i}>
+                    <Skeleton variant="rounded" height={340} />
                   </Grid>
-                </Card>
-              </Grid>
-            ))
-          )}
-        </Grid>
+                ))
+              ) : filteredStories.length === 0 ? (
+                <Grid item xs={12}>
+                  <Paper sx={{ p: 6, textAlign: 'center', borderRadius: 3 }}>
+                    <Typography variant="h6" color="text.secondary">
+                      No stories found for this category.
+                    </Typography>
+                  </Paper>
+                </Grid>
+              ) : (
+                filteredStories.map((story) => (
+                  <Grid item xs={12} key={story.id}>
+                    <Card sx={{ borderRadius: 4, overflow: 'hidden', border: '1px solid #DCE6E1', boxShadow: '0 8px 24px rgba(0,0,0,0.04)' }}>
+                      <Grid container>
+                        <Grid item xs={12} md={5}>
+                          <CardMedia
+                            component="img"
+                            height="100%"
+                            image={story.image_url}
+                            alt={story.title}
+                            onError={(e) => {
+                              e.currentTarget.src = './images/story-aarav.jpg';
+                            }}
+                            sx={{ minHeight: { xs: 240, md: 380 }, objectFit: 'cover' }}
+                          />
+                        </Grid>
+                        <Grid item xs={12} md={7}>
+                          <CardContent sx={{ p: { xs: 3, md: 4.5 }, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                            <Stack direction="row" spacing={1.5} alignItems="center" mb={1.5} flexWrap="wrap" gap={1}>
+                              <Chip label={story.category} size="small" sx={{ bgcolor: '#E4F6ED', color: '#087A52', fontWeight: 800 }} />
+                              <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: '#657889' }}>
+                                <LocationOnRoundedIcon sx={{ fontSize: 16 }} />
+                                <Typography variant="caption" fontWeight={600}>{story.location}</Typography>
+                              </Stack>
+                              <Stack direction="row" spacing={0.5} alignItems="center" sx={{ color: '#657889' }}>
+                                <CalendarMonthRoundedIcon sx={{ fontSize: 16 }} />
+                                <Typography variant="caption" fontWeight={600}>{story.date}</Typography>
+                              </Stack>
+                            </Stack>
+
+                            <Typography variant="h4" fontWeight={800} color="#172B3A" mb={1.5} sx={{ fontSize: { xs: '1.4rem', md: '1.8rem' }, lineHeight: 1.3 }}>
+                              {story.title}
+                            </Typography>
+
+                            <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8, mb: 2.5 }}>
+                              {story.content}
+                            </Typography>
+
+                            {story.quote && (
+                              <Box sx={{ p: 2, bgcolor: '#F4FAF7', borderRadius: 2.5, borderLeft: '4px solid #087A52', mb: 3 }}>
+                                <Stack direction="row" spacing={1} alignItems="flex-start">
+                                  <FormatQuoteRoundedIcon sx={{ color: '#087A52', transform: 'rotate(180deg)', fontSize: 24 }} />
+                                  <Box>
+                                    <Typography variant="body2" sx={{ fontStyle: 'italic', color: '#172B3A', fontWeight: 500 }}>
+                                      "{story.quote}"
+                                    </Typography>
+                                    <Typography variant="caption" fontWeight={700} color="#087A52" sx={{ mt: 0.5, display: 'block' }}>
+                                      — {story.beneficiary_name}
+                                    </Typography>
+                                  </Box>
+                                </Stack>
+                              </Box>
+                            )}
+
+                            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems={{ sm: 'center' }}>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                startIcon={<FavoriteRoundedIcon />}
+                                onClick={() => openDonationModal({ campaignTitle: `Support ${story.category} Initiatives`, presetAmount: 1000 })}
+                                sx={{ py: 1.2, px: 3, fontWeight: 800 }}
+                              >
+                                Help Cases Like This
+                              </Button>
+                              <Typography variant="caption" color="text.secondary">
+                                ⚡ 100% funds directed to verified field relief via <strong>tarun-tiwari@ptyes</strong>
+                              </Typography>
+                            </Stack>
+                          </CardContent>
+                        </Grid>
+                      </Grid>
+                    </Card>
+                  </Grid>
+                ))
+              )}
+            </Grid>
+
+            {/* 5-Year Relief Missions Timeline at bottom of stories */}
+            <Box sx={{ mt: 8 }}>
+              <PastFiveYearsTimeline
+                title="Historical 5-Year Crisis Relief Chronicle (2021–2026)"
+                subtitle="From oxygen cylinder banks in 2021 to 2024 heatwaves and 2026 child rescue drives, see how your contributions consistently stood up for India."
+              />
+            </Box>
+          </>
+        )}
       </Container>
     </Box>
   );

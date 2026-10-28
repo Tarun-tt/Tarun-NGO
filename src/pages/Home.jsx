@@ -34,6 +34,8 @@ import { api } from '../api/client';
 import { formatINR, calcPercentage } from '../utils/formatters';
 import { fallbackCampaigns, fallbackStories } from '../utils/fallbackData';
 import AnimatedCounter from '../components/common/AnimatedCounter';
+import AnimatedProgressBar from '../components/common/AnimatedProgressBar';
+import PastFiveYearsTimeline from '../components/common/PastFiveYearsTimeline';
 
 const focusAreas = [
   {
@@ -135,10 +137,10 @@ const realLifeIncidents = [
     id: 'inc_02',
     badge: 'MIDNIGHT FLOOD RESCUE',
     badgeColor: '#DC2626',
-    title: '1,200 Stranded Flood Survivors in Madhubani',
-    crisis: 'Embankment breached at 2:00 AM. 1,200 daily-wage families trapped on railway tracks without dry food or clean water for 18 hours.',
-    intervention: 'Helping India disaster teams arrived in 6 hours with lifeboats, 1,200 dry ration packs (chura, gur, water tablets) and a mobile hot-khichdi kitchen.',
-    outcome: 'Zero starvation casualties; hot nutritious meals served twice daily for 12 continuous days.',
+    title: '85 Stranded Flood Families in Madhubani',
+    crisis: 'Embankment breached at 2:00 AM. 85 daily-wage families trapped on railway bunds without dry food or clean water for 18 hours.',
+    intervention: 'Helping India disaster teams arrived in 6 hours with relief boats, 85 dry ration packs (chura, gur, water tablets) and a mobile hot-khichdi kitchen.',
+    outcome: 'Zero starvation casualties; hot nutritious meals served twice daily for 8 continuous days.',
     image: './images/incident-flood-relief.jpg',
     sponsorAmount: 2500,
     sponsorLabel: 'Send Family Relief Pack (₹2,500)',
@@ -149,7 +151,7 @@ const realLifeIncidents = [
     badge: 'SIGHT RESTORATION',
     badgeColor: '#087A52',
     title: 'Ramu Kaka (68): Light Restored After 5 Years in Darkness',
-    crisis: 'Completely blind from bilateral cataracts. Too poor to afford ₹12,000 surgery in the city, confined to his bed for half a decade.',
+    crisis: 'Completely blind from bilateral cataracts. Too poor to afford city hospital surgery, confined to his bed for half a decade.',
     intervention: 'Diagnosed by our Arogya Vandana mobile medical van. Free transit, hospitalization, and intraocular lens surgery fully sponsored.',
     outcome: 'Saw his 4-year-old grandson for the first time in his life 48 hours later. 100% vision restored.',
     image: './images/incident-elderly-healthcare.jpg',
@@ -161,10 +163,10 @@ const realLifeIncidents = [
     id: 'inc_04',
     badge: 'MIDNIGHT COLD RESCUE',
     badgeColor: '#2563EB',
-    title: 'Operation Warmth: Protecting 3,500 Pavement Dwellers',
-    crisis: 'Winter temperatures plummeted to 3°C on North Indian pavements. Newborns and elderly faced fatal hypothermia.',
-    intervention: 'Midnight volunteer teams distributed 3,500 thick 4-ply thermal blankets, beanies, and hot immunity soup between 11 PM and 4 AM.',
-    outcome: 'Prevented hypothermia deaths across 8 vulnerable shelter zones; 3,500 lives kept warm.',
+    title: 'Operation Warmth: Protecting 280 Pavement Dwellers',
+    crisis: 'Winter temperatures plummeted to 3°C on North Indian pavements. Newborns and elderly faced severe hypothermia.',
+    intervention: 'Midnight volunteer teams distributed 280 thick 4-ply thermal blankets, beanies, and hot immunity soup between 11 PM and 2 AM.',
+    outcome: 'Prevented hypothermia casualties across vulnerable shelter zones; 280 individuals kept warm.',
     image: './images/incident-winter-drive.jpg',
     sponsorAmount: 500,
     sponsorLabel: 'Provide Thermal Blanket & Meals (₹500)',
@@ -241,7 +243,7 @@ export default function Home() {
                 }}
               />
               <Typography variant="body2" sx={{ fontSize: { xs: '0.8rem', sm: '0.88rem' }, color: '#E2ECE6' }}>
-                Bihar Flood Crisis & Rural Winter Rescue: <strong>1,200 families</strong> urgently need meals and blankets today.
+                Grassroots Winter & Flood Support: <strong>45 vulnerable families</strong> urgently assisted with hot meals and warm blankets this month.
               </Typography>
             </Stack>
 
@@ -400,11 +402,11 @@ export default function Home() {
         <Container maxWidth="xl">
           <Grid container spacing={3}>
             {[
-              { icon: <GroupsRoundedIcon sx={{ fontSize: 32 }} />, value: '50,000+', label: 'People Directly Supported' },
-              { icon: <MenuBookRoundedIcon sx={{ fontSize: 32 }} />, value: '200+', label: 'Education Programs Delivered' },
-              { icon: <HealthAndSafetyRoundedIcon sx={{ fontSize: 32 }} />, value: '150+', label: 'Mobile Health Clinics' },
-              { icon: <ParkRoundedIcon sx={{ fontSize: 32 }} />, value: '50,000+', label: 'Native Trees Planted' },
-              { icon: <PublicRoundedIcon sx={{ fontSize: 32 }} />, value: '15', label: 'Indian States Served' },
+              { icon: <GroupsRoundedIcon sx={{ fontSize: 32 }} />, value: '2,450+', label: 'Lives Directly Assisted' },
+              { icon: <MenuBookRoundedIcon sx={{ fontSize: 32 }} />, value: '420+', label: 'Students in Study Centers' },
+              { icon: <HealthAndSafetyRoundedIcon sx={{ fontSize: 32 }} />, value: '650+', label: 'Health Camp Patients' },
+              { icon: <ParkRoundedIcon sx={{ fontSize: 32 }} />, value: '1,200+', label: 'Community Trees Planted' },
+              { icon: <PublicRoundedIcon sx={{ fontSize: 32 }} />, value: '4', label: 'Active Focus States' },
             ].map((stat, i) => (
               <Grid item xs={6} sm={4} md key={stat.label}>
                 <Stack
@@ -767,13 +769,16 @@ export default function Home() {
                                 Goal: <strong>{formatINR(campaign.target_amount)}</strong>
                               </Typography>
                             </Stack>
-                            <LinearProgress variant="determinate" value={percentage} />
+                            <AnimatedProgressBar value={percentage} height={8} />
                             <Stack direction="row" justifyContent="space-between" mt={0.8}>
+                              <AnimatedCounter
+                                target={percentage}
+                                suffix="% completed"
+                                variant="caption"
+                                sx={{ color: '#526677', fontWeight: 600 }}
+                              />
                               <Typography variant="caption" color="text.secondary">
-                                {percentage}% completed
-                              </Typography>
-                              <Typography variant="caption" color="text.secondary">
-                                <strong>{campaign.donor_count || 0}</strong> confirmed donors
+                                <strong><AnimatedCounter target={campaign.donor_count || 0} variant="caption" sx={{ fontWeight: 700, color: '#172B3A' }} /></strong> confirmed donors
                               </Typography>
                             </Stack>
                           </Box>
@@ -806,6 +811,11 @@ export default function Home() {
           </Grid>
         </Container>
       </Box>
+
+      {/* 4.5 Past 5-Year Relief Missions (2021-2026) */}
+      <Container maxWidth="xl">
+        <PastFiveYearsTimeline />
+      </Container>
 
       {/* 5. Donation Impact Calculator Section */}
       <Box component="section" sx={{ py: { xs: 8, md: 10 }, bgcolor: '#FFFFFF' }}>
