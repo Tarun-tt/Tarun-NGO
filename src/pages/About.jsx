@@ -63,10 +63,10 @@ export default function About() {
             >
               <Box
                 component="img"
-                src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=85"
+                src="./images/volunteer-action.jpg"
                 alt="Helping India Community Volunteers"
                 onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=85';
+                  e.currentTarget.src = './images/volunteer-action.jpg';
                 }}
                 sx={{
                   width: '100%',

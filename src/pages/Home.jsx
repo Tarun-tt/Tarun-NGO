@@ -34,7 +34,7 @@ const focusAreas = [
     icon: <SchoolRoundedIcon />,
     tint: '#E6F4EA',
     color: '#087A52',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80',
+    image: './images/education.jpg',
   },
   {
     title: 'Healthcare Access',
@@ -42,7 +42,7 @@ const focusAreas = [
     icon: <HealthAndSafetyRoundedIcon />,
     tint: '#FEECEC',
     color: '#DC2626',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80',
+    image: './images/healthcare.jpg',
   },
   {
     title: 'Hunger Relief',
@@ -50,7 +50,7 @@ const focusAreas = [
     icon: <RestaurantRoundedIcon />,
     tint: '#FFF7ED',
     color: '#EA580C',
-    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80',
+    image: './images/hunger-relief.jpg',
   },
   {
     title: 'Women Empowerment',
@@ -58,7 +58,7 @@ const focusAreas = [
     icon: <GroupsRoundedIcon />,
     tint: '#F3E8FF',
     color: '#7C3AED',
-    image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80',
+    image: './images/women-empowerment.jpg',
   },
   {
     title: 'Child Welfare',
@@ -66,7 +66,7 @@ const focusAreas = [
     icon: <ChildCareRoundedIcon />,
     tint: '#EFF6FF',
     color: '#2563EB',
-    image: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=600&q=80',
+    image: './images/child-welfare.jpg',
   },
   {
     title: 'Clean Environment',
@@ -74,7 +74,7 @@ const focusAreas = [
     icon: <ParkRoundedIcon />,
     tint: '#ECFDF5',
     color: '#059669',
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80',
+    image: './images/environment.jpg',
   },
 ];
 
@@ -84,28 +84,28 @@ const donationTiers = [
     label: 'Student Learning Kit',
     category: 'Education',
     desc: 'Provides school stationery, notebooks, and learning aids for 1 underprivileged child.',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80',
+    image: './images/tier-kit.jpg',
   },
   {
     amount: 1000,
     label: 'Primary Healthcare Camp',
     category: 'Healthcare',
     desc: 'Funds medical screening, basic diagnostic tests, and doctor consultation for 2 elderly citizens.',
-    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
+    image: './images/healthcare.jpg',
   },
   {
     amount: 2500,
     label: 'Family Food Security',
     category: 'Hunger Relief',
     desc: 'Provides one full month of balanced ration (rice, wheat, pulses, oil, spices) for a family in need.',
-    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80',
+    image: './images/tier-ration.jpg',
   },
   {
     amount: 5000,
     label: 'Plant 25 Native Trees',
     category: 'Environment',
     desc: 'Saplings, protective bamboo tree-guards, and 1-year maintenance for environmental restoration.',
-    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80',
+    image: './images/environment.jpg',
   },
 ];
 
@@ -350,7 +350,7 @@ export default function Home() {
                     image={area.image}
                     alt={area.title}
                     onError={(e) => {
-                      e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80';
+                      e.currentTarget.src = './images/education.jpg';
                     }}
                     sx={{ objectFit: 'cover' }}
                   />
@@ -438,7 +438,7 @@ export default function Home() {
                             image={campaign.image_url}
                             alt={campaign.title}
                             onError={(e) => {
-                              e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';
+                              e.currentTarget.src = './images/education.jpg';
                             }}
                             sx={{ objectFit: 'cover' }}
                           />
@@ -572,7 +572,7 @@ export default function Home() {
                       src={tier.image}
                       alt={tier.label}
                       onError={(e) => {
-                        e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80';
+                        e.currentTarget.src = './images/tier-kit.jpg';
                       }}
                       sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
@@ -688,7 +688,7 @@ export default function Home() {
                     image={story.image_url}
                     alt={story.title}
                     onError={(e) => {
-                      e.currentTarget.src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=85';
+                      e.currentTarget.src = './images/story-aarav.jpg';
                     }}
                     sx={{ objectFit: 'cover' }}
                   />

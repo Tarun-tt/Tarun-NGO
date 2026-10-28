@@ -58,7 +58,7 @@ export default function StoriesPage() {
                         image={story.image_url}
                         alt={story.title}
                         onError={(e) => {
-                          e.currentTarget.src = 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=85';
+                          e.currentTarget.src = './images/story-aarav.jpg';
                         }}
                         sx={{ minHeight: { xs: 240, md: 360 }, objectFit: 'cover' }}
                       />

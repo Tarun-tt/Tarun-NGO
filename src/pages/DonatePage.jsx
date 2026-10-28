@@ -24,11 +24,11 @@ const impactDescriptions = {
 };
 
 const impactImages = {
-  500: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80',
-  1000: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80',
-  2500: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=600&q=80',
-  5000: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80',
-  10000: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80',
+  500: './images/tier-kit.jpg',
+  1000: './images/healthcare.jpg',
+  2500: './images/tier-ration.jpg',
+  5000: './images/environment.jpg',
+  10000: './images/women-empowerment.jpg',
 };
 
 export default function DonatePage() {
@@ -369,10 +369,10 @@ export default function DonatePage() {
               >
                 <Box
                   component="img"
-                  src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80"
+                  src="./images/volunteer-action.jpg"
                   alt="Every Rupee Counts - Helping India"
                   onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';
+                    e.currentTarget.src = './images/volunteer-action.jpg';
                   }}
                   sx={{ width: '100%', height: 180, objectFit: 'cover', display: 'block' }}
                 />

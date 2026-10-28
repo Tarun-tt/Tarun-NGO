@@ -99,7 +99,7 @@ export default function CauseDetail() {
               src={campaign.image_url}
               alt={campaign.title}
               onError={(e) => {
-                e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85';
+                e.currentTarget.src = './images/education.jpg';
               }}
               sx={{
                 width: '100%',

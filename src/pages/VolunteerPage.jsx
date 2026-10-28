@@ -110,10 +110,10 @@ export default function VolunteerPage() {
             >
               <Box
                 component="img"
-                src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
+                src="./images/volunteer-action.jpg"
                 alt="Helping India Volunteers in Action"
                 onError={(e) => {
-                  e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80';
+                  e.currentTarget.src = './images/volunteer-action.jpg';
                 }}
                 sx={{ width: '100%', height: 200, objectFit: 'cover', display: 'block' }}
               />

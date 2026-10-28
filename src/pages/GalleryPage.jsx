@@ -100,7 +100,7 @@ export default function GalleryPage() {
                     image={item.image_url}
                     alt={item.title}
                     onError={(e) => {
-                      e.currentTarget.src = 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=85';
+                      e.currentTarget.src = './images/education.jpg';
                     }}
                     sx={{ objectFit: 'cover' }}
                   />

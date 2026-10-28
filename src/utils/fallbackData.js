@@ -11,7 +11,7 @@ export const fallbackCampaigns = [
     target_amount: 500000,
     raised_amount: 345000,
     donor_count: 142,
-    image_url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85',
+    image_url: './images/education.jpg',
     status: 'active',
     featured: 1,
     recentDonors: [
@@ -30,7 +30,7 @@ export const fallbackCampaigns = [
     target_amount: 450000,
     raised_amount: 285000,
     donor_count: 98,
-    image_url: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85',
+    image_url: './images/healthcare.jpg',
     status: 'active',
     featured: 1,
     recentDonors: [
@@ -47,7 +47,7 @@ export const fallbackCampaigns = [
     target_amount: 400000,
     raised_amount: 215000,
     donor_count: 85,
-    image_url: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=85',
+    image_url: './images/hunger-relief.jpg',
     status: 'active',
     featured: 1,
     recentDonors: []
@@ -62,7 +62,7 @@ export const fallbackCampaigns = [
     target_amount: 350000,
     raised_amount: 195000,
     donor_count: 73,
-    image_url: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=85',
+    image_url: './images/women-empowerment.jpg',
     status: 'active',
     featured: 1,
     recentDonors: []
@@ -77,7 +77,7 @@ export const fallbackCampaigns = [
     target_amount: 300000,
     raised_amount: 140000,
     donor_count: 64,
-    image_url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1200&q=85',
+    image_url: './images/environment.jpg',
     status: 'active',
     featured: 1,
     recentDonors: []
@@ -92,7 +92,7 @@ export const fallbackCampaigns = [
     target_amount: 300000,
     raised_amount: 165000,
     donor_count: 60,
-    image_url: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=85',
+    image_url: './images/child-welfare.jpg',
     status: 'active',
     featured: 1,
     recentDonors: []
@@ -108,7 +108,7 @@ export const fallbackStories = [
     content: 'Aarav is the eldest of three siblings from a family residing in an informal settlement near Jaipur. When financial distress hit his household, Aarav began helping at a local tea stall. Helping India field volunteers identified Aarav during our doorstep education survey and enrolled him in our evening study center. Today, Aarav has scored 92% in his annual examinations and dreams of becoming an engineer.',
     beneficiary_name: 'Aarav (Name changed for minor privacy)',
     location: 'Jaipur, Rajasthan',
-    image_url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85',
+    image_url: './images/story-aarav.jpg',
     quote: 'I used to think my studies were over. Now every evening I get to read books and solve science puzzles.',
     date: 'October 2025'
   },
@@ -120,7 +120,7 @@ export const fallbackStories = [
     content: 'Sunita Devi from rural Uttar Pradesh earned sporadic daily wages of under ₹150. Joining Helping India 6-month tailoring and embroidery fellowship gave her hands-on master training, a sewing machine grant, and basic financial literacy. She now creates school uniforms and festive wear, earning upwards of ₹14,000 monthly.',
     beneficiary_name: 'Sunita Devi',
     location: 'Varanasi, Uttar Pradesh',
-    image_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=85',
+    image_url: './images/story-sunita.jpg',
     quote: 'Financial independence gave me my self-respect back. I can now fund both my daughters higher secondary schooling without taking loans.',
     date: 'January 2026'
   },
@@ -132,7 +132,7 @@ export const fallbackStories = [
     content: 'In severe drought-prone Bundelkhand, farming families struggled with depleted borewells. Over two planting seasons, 140 community volunteers planted native Neem and Shisham trees and constructed 8 decentralized rainwater retention trenches. Groundwater monitoring confirmed an average rise of 1.8m in water levels across three surrounding village wells.',
     beneficiary_name: 'Gram Panchayat & Village Community',
     location: 'Bundelkhand, Madhya Pradesh',
-    image_url: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=85',
+    image_url: './images/environment.jpg',
     quote: 'Our village wells used to dry up by February. This year our fields remained green throughout April.',
     date: 'December 2025'
   }
@@ -143,7 +143,7 @@ export const fallbackGallery = [
     id: 'gal_01',
     title: 'Community Learning Camp in Rural Uttar Pradesh',
     category: 'Education',
-    image_url: 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=85',
+    image_url: './images/education.jpg',
     description: 'Volunteer educators teaching interactive arithmetic and reading sessions under the open banyan tree.',
     caption: 'Joyful learning beyond four walls'
   },
@@ -151,7 +151,7 @@ export const fallbackGallery = [
     id: 'gal_02',
     title: 'Mobile Health Clinic Consultation',
     category: 'Healthcare',
-    image_url: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=85',
+    image_url: './images/healthcare.jpg',
     description: 'Doctor examining an elderly patient during our bi-weekly rural healthcare camp.',
     caption: 'Free medical diagnosis and medicine distribution'
   },
@@ -159,7 +159,7 @@ export const fallbackGallery = [
     id: 'gal_03',
     title: 'Annapoorna Hot Meal Distribution Drive',
     category: 'Hunger Relief',
-    image_url: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=85',
+    image_url: './images/hunger-relief.jpg',
     description: 'Freshly cooked wholesome meals served with care to migrant workers and children.',
     caption: 'Nutrition, dignity, and zero food waste'
   },
@@ -167,7 +167,7 @@ export const fallbackGallery = [
     id: 'gal_04',
     title: 'Women Tailoring & Skill Training Workshop',
     category: 'Women Empowerment',
-    image_url: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=85',
+    image_url: './images/women-empowerment.jpg',
     description: 'Hands-on practical training with commercial sewing machines at our vocational center.',
     caption: 'Fostering self-reliance and entrepreneurship'
   },
@@ -175,7 +175,7 @@ export const fallbackGallery = [
     id: 'gal_05',
     title: 'Community Monsoon Tree Plantation',
     category: 'Environment',
-    image_url: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=85',
+    image_url: './images/environment.jpg',
     description: 'Volunteers and school students planting native saplings along river banks.',
     caption: '50,000 native trees for climate resilience'
   },
@@ -183,7 +183,7 @@ export const fallbackGallery = [
     id: 'gal_06',
     title: 'Children Day Creative Expression Day',
     category: 'Child Welfare',
-    image_url: 'https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=800&q=85',
+    image_url: './images/child-welfare.jpg',
     description: 'Painting, dance, and cultural celebration for shelter home kids.',
     caption: 'Every child deserves safe spaces to express themselves'
   }

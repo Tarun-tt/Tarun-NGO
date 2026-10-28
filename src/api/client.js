@@ -135,7 +135,23 @@ export const api = {
 
   // Campaigns
   getCampaigns: async (category) => {
-    const campaigns = getStorage(STORAGE_KEYS.CAMPAIGNS, fallbackCampaigns);
+    let campaigns = getStorage(STORAGE_KEYS.CAMPAIGNS, fallbackCampaigns);
+    if (!campaigns || !Array.isArray(campaigns) || campaigns.length === 0) {
+      campaigns = fallbackCampaigns;
+      setStorage(STORAGE_KEYS.CAMPAIGNS, fallbackCampaigns);
+    } else {
+      // Sync with generated local images if stored data had old Unsplash links
+      let updated = false;
+      campaigns = campaigns.map((c) => {
+        const fallback = fallbackCampaigns.find((f) => f.id === c.id);
+        if (fallback && (!c.image_url || c.image_url.includes('images.unsplash.com'))) {
+          updated = true;
+          return { ...c, image_url: fallback.image_url };
+        }
+        return c;
+      });
+      if (updated) setStorage(STORAGE_KEYS.CAMPAIGNS, campaigns);
+    }
     if (category && category !== "All") {
       return campaigns.filter((c) => c.category === category);
     }
@@ -143,7 +159,7 @@ export const api = {
   },
 
   getCampaign: async (slug) => {
-    const campaigns = getStorage(STORAGE_KEYS.CAMPAIGNS, fallbackCampaigns);
+    const campaigns = await api.getCampaigns();
     const found = campaigns.find((c) => c.slug === slug || c.id === slug);
     if (!found) throw new Error("Campaign not found");
     return found;
@@ -412,11 +428,43 @@ export const api = {
 
   // Stories & Gallery
   getStories: async () => {
-    return getStorage(STORAGE_KEYS.STORIES, fallbackStories);
+    let stories = getStorage(STORAGE_KEYS.STORIES, fallbackStories);
+    if (!stories || !Array.isArray(stories) || stories.length === 0) {
+      stories = fallbackStories;
+      setStorage(STORAGE_KEYS.STORIES, fallbackStories);
+    } else {
+      let updated = false;
+      stories = stories.map((s) => {
+        const fallback = fallbackStories.find((f) => f.id === s.id);
+        if (fallback && (!s.image_url || s.image_url.includes('images.unsplash.com'))) {
+          updated = true;
+          return { ...s, image_url: fallback.image_url };
+        }
+        return s;
+      });
+      if (updated) setStorage(STORAGE_KEYS.STORIES, stories);
+    }
+    return stories;
   },
 
   getGallery: async () => {
-    return getStorage(STORAGE_KEYS.GALLERY, fallbackGallery);
+    let gallery = getStorage(STORAGE_KEYS.GALLERY, fallbackGallery);
+    if (!gallery || !Array.isArray(gallery) || gallery.length === 0) {
+      gallery = fallbackGallery;
+      setStorage(STORAGE_KEYS.GALLERY, fallbackGallery);
+    } else {
+      let updated = false;
+      gallery = gallery.map((g) => {
+        const fallback = fallbackGallery.find((f) => f.id === g.id);
+        if (fallback && (!g.image_url || g.image_url.includes('images.unsplash.com'))) {
+          updated = true;
+          return { ...g, image_url: fallback.image_url };
+        }
+        return g;
+      });
+      if (updated) setStorage(STORAGE_KEYS.GALLERY, gallery);
+    }
+    return gallery;
   },
 
   // Admin Auth
