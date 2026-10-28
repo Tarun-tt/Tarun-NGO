@@ -1,5 +1,6 @@
 import React from 'react';
-import { Container, Box, Typography, Grid, Paper, Stack, LinearProgress, Divider, Chip } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Container, Box, Typography, Grid, Paper, Stack, LinearProgress, Divider, Chip, Button } from '@mui/material';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 import HealthAndSafetyRoundedIcon from '@mui/icons-material/HealthAndSafetyRounded';
@@ -8,6 +9,7 @@ import RestaurantRoundedIcon from '@mui/icons-material/RestaurantRounded';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import VerifiedUserRoundedIcon from '@mui/icons-material/VerifiedUserRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import AnimatedCounter from '../components/common/AnimatedCounter';
 
 export default function ImpactPage() {
@@ -211,6 +213,51 @@ export default function ImpactPage() {
               </Box>
             </Grid>
           </Grid>
+        </Paper>
+
+        {/* Motivating Call to Action */}
+        <Paper
+          elevation={0}
+          sx={{
+            mt: 6,
+            p: { xs: 3.5, md: 5 },
+            borderRadius: 4,
+            bgcolor: '#087A52',
+            color: '#FFFFFF',
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 3,
+          }}
+        >
+          <Box sx={{ maxWidth: 700 }}>
+            <Typography variant="h4" fontWeight={800} color="#FFFFFF" mb={1}>
+              Be the Reason Someone Smiles Tomorrow
+            </Typography>
+            <Typography variant="body1" sx={{ color: '#D2ECE0', lineHeight: 1.7 }}>
+              Every rupee transferred directly to verified UPI <strong>tarun-tiwari@ptyes</strong> (Tarun Tiwari, Yes Bank) immediately funds school kits, hot meals, and life-saving medicines. 50% Tax Deductible under Section 80G.
+            </Typography>
+          </Box>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            component={RouterLink}
+            to="/donate"
+            startIcon={<FavoriteRoundedIcon />}
+            sx={{
+              py: 1.6,
+              px: 4,
+              fontWeight: 800,
+              fontSize: '1.05rem',
+              whiteSpace: 'nowrap',
+              background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+              boxShadow: '0 6px 20px rgba(245, 158, 11, 0.4)',
+            }}
+          >
+            Donate to Helping India
+          </Button>
         </Paper>
       </Container>
     </Box>

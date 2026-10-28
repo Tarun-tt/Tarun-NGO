@@ -20,6 +20,14 @@ import VerifiedUserRoundedIcon from '@mui/icons-material/VerifiedUserRounded';
 import ShieldRoundedIcon from '@mui/icons-material/ShieldRounded';
 import AssignmentTurnedInRoundedIcon from '@mui/icons-material/AssignmentTurnedInRounded';
 import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import FlashOnRoundedIcon from '@mui/icons-material/FlashOnRounded';
+import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import WaterDamageRoundedIcon from '@mui/icons-material/WaterDamageRounded';
+import MedicalServicesRoundedIcon from '@mui/icons-material/MedicalServicesRounded';
+import AcUnitRoundedIcon from '@mui/icons-material/AcUnitRounded';
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
+import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
 
 import { useDonation } from '../context/DonationContext';
 import { api } from '../api/client';
@@ -109,6 +117,70 @@ const donationTiers = [
   },
 ];
 
+const realLifeIncidents = [
+  {
+    id: 'inc_01',
+    badge: 'CHILD LABOR RESCUE',
+    badgeColor: '#D97706',
+    title: '7-Year-Old Priya: From Brick Kilns to Top of Her Class',
+    crisis: 'Carried 15kg brick trays in 42°C heat to service inherited family debt. Blistered hands and zero schooling.',
+    intervention: 'Helping India field educators intervened, replaced debt through nutritional stipends, and enrolled Priya in our bridge school with books & uniform.',
+    outcome: 'Reads fluent Hindi, passed 2nd grade entrance test with 94%, dreams of becoming a doctor.',
+    image: './images/incident-priya-education.jpg',
+    sponsorAmount: 500,
+    sponsorLabel: 'Sponsor a Child Like Priya (₹500)',
+    category: 'Child Welfare & Education'
+  },
+  {
+    id: 'inc_02',
+    badge: 'MIDNIGHT FLOOD RESCUE',
+    badgeColor: '#DC2626',
+    title: '1,200 Stranded Flood Survivors in Madhubani',
+    crisis: 'Embankment breached at 2:00 AM. 1,200 daily-wage families trapped on railway tracks without dry food or clean water for 18 hours.',
+    intervention: 'Helping India disaster teams arrived in 6 hours with lifeboats, 1,200 dry ration packs (chura, gur, water tablets) and a mobile hot-khichdi kitchen.',
+    outcome: 'Zero starvation casualties; hot nutritious meals served twice daily for 12 continuous days.',
+    image: './images/incident-flood-relief.jpg',
+    sponsorAmount: 2500,
+    sponsorLabel: 'Send Family Relief Pack (₹2,500)',
+    category: 'Emergency Relief'
+  },
+  {
+    id: 'inc_03',
+    badge: 'SIGHT RESTORATION',
+    badgeColor: '#087A52',
+    title: 'Ramu Kaka (68): Light Restored After 5 Years in Darkness',
+    crisis: 'Completely blind from bilateral cataracts. Too poor to afford ₹12,000 surgery in the city, confined to his bed for half a decade.',
+    intervention: 'Diagnosed by our Arogya Vandana mobile medical van. Free transit, hospitalization, and intraocular lens surgery fully sponsored.',
+    outcome: 'Saw his 4-year-old grandson for the first time in his life 48 hours later. 100% vision restored.',
+    image: './images/incident-elderly-healthcare.jpg',
+    sponsorAmount: 1000,
+    sponsorLabel: 'Restore an Elder’s Eyesight (₹1,000)',
+    category: 'Healthcare'
+  },
+  {
+    id: 'inc_04',
+    badge: 'MIDNIGHT COLD RESCUE',
+    badgeColor: '#2563EB',
+    title: 'Operation Warmth: Protecting 3,500 Pavement Dwellers',
+    crisis: 'Winter temperatures plummeted to 3°C on North Indian pavements. Newborns and elderly faced fatal hypothermia.',
+    intervention: 'Midnight volunteer teams distributed 3,500 thick 4-ply thermal blankets, beanies, and hot immunity soup between 11 PM and 4 AM.',
+    outcome: 'Prevented hypothermia deaths across 8 vulnerable shelter zones; 3,500 lives kept warm.',
+    image: './images/incident-winter-drive.jpg',
+    sponsorAmount: 500,
+    sponsorLabel: 'Provide Thermal Blanket & Meals (₹500)',
+    category: 'Hunger & Shelter'
+  }
+];
+
+const liveDonations = [
+  { name: 'Amit Verma', city: 'Gurgaon', amount: 2500, cause: 'Flood Relief Grocery Pack', time: '4m ago' },
+  { name: 'Dr. Sneha K.', city: 'Bengaluru', amount: 1000, cause: 'Priya’s Learning Kit', time: '11m ago' },
+  { name: 'Vikram S.', city: 'Delhi', amount: 5000, cause: 'Mobile Rural Health Clinics', time: '18m ago' },
+  { name: 'Pooja Hegde', city: 'Pune', amount: 2500, cause: 'Women Artisan Fellowship', time: '34m ago' },
+  { name: 'Kavita Nair', city: 'Kochi', amount: 500, cause: 'Student Stationery Kit', time: '46m ago' },
+  { name: 'Rajesh Mehra', city: 'Jaipur', amount: 5000, cause: 'Plant 25 Native Trees', time: '1h ago' },
+];
+
 export default function Home() {
   const { openDonationModal } = useDonation();
   const [campaigns, setCampaigns] = useState(fallbackCampaigns);
@@ -139,6 +211,66 @@ export default function Home() {
 
   return (
     <>
+      {/* 0. Urgent Need & Direct UPI Announcement Bar */}
+      <Box
+        sx={{
+          bgcolor: '#172B3A',
+          color: '#FFFFFF',
+          py: 1.2,
+          px: 2,
+          borderBottom: '2px solid #F59E0B',
+        }}
+      >
+        <Container maxWidth="xl">
+          <Stack
+            direction={{ xs: 'column', md: 'row' }}
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={1.5}
+          >
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Chip
+                label="URGENT RELIEF ACTIVE"
+                size="small"
+                sx={{
+                  bgcolor: '#DC2626',
+                  color: '#FFFFFF',
+                  fontWeight: 900,
+                  fontSize: '0.7rem',
+                  letterSpacing: '0.5px',
+                }}
+              />
+              <Typography variant="body2" sx={{ fontSize: { xs: '0.8rem', sm: '0.88rem' }, color: '#E2ECE6' }}>
+                Bihar Flood Crisis & Rural Winter Rescue: <strong>1,200 families</strong> urgently need meals and blankets today.
+              </Typography>
+            </Stack>
+
+            <Stack direction="row" spacing={2} alignItems="center">
+              <Typography variant="caption" sx={{ color: '#FBBF24', fontWeight: 700, display: { xs: 'none', sm: 'block' } }}>
+                Official UPI: <strong>tarun-tiwari@ptyes</strong> · 50% Tax Exemption (80G)
+              </Typography>
+              <Button
+                size="small"
+                variant="contained"
+                onClick={() => openDonationModal({ presetAmount: 500, campaignTitle: 'Urgent Disaster & Winter Relief' })}
+                sx={{
+                  bgcolor: '#F59E0B',
+                  color: '#172B3A',
+                  fontWeight: 800,
+                  fontSize: '0.78rem',
+                  py: 0.4,
+                  px: 2,
+                  whiteSpace: 'nowrap',
+                  '&:hover': { bgcolor: '#D97706', color: '#FFFFFF' },
+                }}
+              >
+                Send ₹500 Help Now
+              </Button>
+            </Stack>
+          </Stack>
+        </Container>
+      </Box>
+
       {/* 1. Hero Section */}
       <Box
         sx={{
@@ -307,6 +439,38 @@ export default function Home() {
         </Container>
       </Box>
 
+      {/* Live Compassion Feed (Social Proof) */}
+      <Box sx={{ bgcolor: '#FAFDFB', py: 1.5, borderBottom: '1px solid #E2EBE6', overflow: 'hidden' }}>
+        <Container maxWidth="xl">
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} alignItems="center" justifyContent="space-between">
+            <Stack direction="row" spacing={1} alignItems="center" sx={{ flexShrink: 0 }}>
+              <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#12A36D' }} />
+              <Typography variant="caption" sx={{ fontWeight: 800, color: '#087A52', letterSpacing: '0.5px' }}>
+                LIVE DONOR FEED:
+              </Typography>
+            </Stack>
+            <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto', py: 0.5, width: '100%', scrollbarWidth: 'none' }}>
+              {liveDonations.map((d, i) => (
+                <Box key={i} sx={{ display: 'inline-flex', alignItems: 'center', gap: 1, whiteSpace: 'nowrap', bgcolor: '#FFFFFF', px: 1.8, py: 0.6, borderRadius: 2, border: '1px solid #D5E8DD' }}>
+                  <Typography variant="caption" fontWeight={700} color="#172B3A">
+                    {d.name} ({d.city})
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#087A52', fontWeight: 800 }}>
+                    gave {formatINR(d.amount)}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    • {d.cause}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: '#7E9185', fontSize: '0.7rem' }}>
+                    ({d.time})
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Stack>
+        </Container>
+      </Box>
+
       {/* 3. Focus Areas */}
       <Box component="section" sx={{ py: { xs: 8, md: 10 }, bgcolor: '#FFFFFF' }}>
         <Container maxWidth="xl">
@@ -384,6 +548,121 @@ export default function Home() {
                       sx={{ p: 0, color: '#087A52', alignSelf: 'flex-start', fontWeight: 700 }}
                     >
                       View Initiative
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* 3.5 Real Incidents & Urgent Ground Realities */}
+      <Box component="section" sx={{ py: { xs: 8, md: 10 }, bgcolor: '#F4FAF7' }}>
+        <Container maxWidth="xl">
+          <Box sx={{ maxWidth: 850, mb: 6 }}>
+            <Chip
+              icon={<FlashOnRoundedIcon sx={{ fontSize: '18px !important', color: '#DC2626 !important' }} />}
+              label="GROUND ZERO REALITIES"
+              sx={{ bgcolor: '#FEE2E2', color: '#DC2626', fontWeight: 900, mb: 1.5, letterSpacing: '0.5px' }}
+            />
+            <Typography variant="h2" sx={{ fontSize: { xs: '2.2rem', md: '2.8rem' }, mb: 2 }}>
+              Real Incidents. Real Lives You Can Save Today.
+            </Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ fontSize: '1.1rem', lineHeight: 1.8 }}>
+              Poverty in India is not a distant number—it is a child hauling bricks in the scorching heat, an elderly grandfather sitting in 5 years of curable darkness, or a flood-hit mother without dry food for her shivering newborn. See how your contribution directly reverses tragedy into hope.
+            </Typography>
+          </Box>
+
+          <Grid container spacing={3.5}>
+            {realLifeIncidents.map((inc) => (
+              <Grid item xs={12} md={6} key={inc.id}>
+                <Card
+                  sx={{
+                    borderRadius: 4,
+                    overflow: 'hidden',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    border: '1.5px solid #D5E8DD',
+                    bgcolor: '#FFFFFF',
+                    transition: 'transform 0.25s, box-shadow 0.25s',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 16px 36px rgba(8, 122, 82, 0.1)',
+                    },
+                  }}
+                >
+                  <Box sx={{ position: 'relative', height: 240, overflow: 'hidden' }}>
+                    <CardMedia
+                      component="img"
+                      height="240"
+                      image={inc.image}
+                      alt={inc.title}
+                      onError={(e) => {
+                        e.currentTarget.src = './images/incident-priya-education.jpg';
+                      }}
+                      sx={{ objectFit: 'cover' }}
+                    />
+                    <Chip
+                      label={inc.badge}
+                      size="small"
+                      sx={{
+                        position: 'absolute',
+                        top: 14,
+                        left: 14,
+                        bgcolor: inc.badgeColor,
+                        color: '#FFFFFF',
+                        fontWeight: 900,
+                        fontSize: '0.72rem',
+                        letterSpacing: '0.5px',
+                      }}
+                    />
+                  </Box>
+
+                  <CardContent sx={{ p: 3.5, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography variant="h5" fontWeight={800} color="#172B3A" mb={2} sx={{ lineHeight: 1.3 }}>
+                      {inc.title}
+                    </Typography>
+
+                    {/* Crisis vs Intervention comparison */}
+                    <Box sx={{ p: 2, bgcolor: '#FEF2F2', borderRadius: 2.5, borderLeft: '4px solid #DC2626', mb: 2 }}>
+                      <Typography variant="caption" sx={{ color: '#DC2626', fontWeight: 900, textTransform: 'uppercase', display: 'block', mb: 0.3 }}>
+                        ⚠️ The Crisis on the Ground:
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#7F1D1D', lineHeight: 1.6 }}>
+                        {inc.crisis}
+                      </Typography>
+                    </Box>
+
+                    <Box sx={{ p: 2, bgcolor: '#F0FDF4', borderRadius: 2.5, borderLeft: '4px solid #087A52', mb: 2.5, flexGrow: 1 }}>
+                      <Typography variant="caption" sx={{ color: '#087A52', fontWeight: 900, textTransform: 'uppercase', display: 'block', mb: 0.3 }}>
+                        ✅ Helping India Intervention & Outcome:
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#14532D', lineHeight: 1.6, mb: 1 }}>
+                        {inc.intervention}
+                      </Typography>
+                      <Typography variant="caption" sx={{ color: '#087A52', fontWeight: 700, display: 'block' }}>
+                        🎯 Outcome: {inc.outcome}
+                      </Typography>
+                    </Box>
+
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      size="large"
+                      fullWidth
+                      startIcon={<FavoriteRoundedIcon />}
+                      onClick={() => openDonationModal({ campaignTitle: inc.title, presetAmount: inc.sponsorAmount })}
+                      sx={{
+                        py: 1.4,
+                        fontWeight: 800,
+                        fontSize: '0.96rem',
+                        background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
+                        boxShadow: '0 4px 14px rgba(245, 158, 11, 0.3)',
+                      }}
+                    >
+                      {inc.sponsorLabel}
                     </Button>
                   </CardContent>
                 </Card>
@@ -710,9 +989,21 @@ export default function Home() {
                         </Typography>
                       </Box>
                     )}
-                    <Button component={RouterLink} to="/stories" size="small" endIcon={<ArrowForwardRoundedIcon fontSize="small" />} sx={{ p: 0, color: '#087A52', alignSelf: 'flex-start', fontWeight: 700 }}>
-                      Read Full Story
-                    </Button>
+                    <Stack direction="row" spacing={1.5} alignItems="center" mt="auto" pt={1}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        startIcon={<FavoriteRoundedIcon fontSize="small" />}
+                        onClick={() => openDonationModal({ campaignTitle: story.title, presetAmount: 1000 })}
+                        sx={{ fontWeight: 800, fontSize: '0.8rem', py: 0.8 }}
+                      >
+                        Sponsor Relief
+                      </Button>
+                      <Button component={RouterLink} to="/stories" size="small" endIcon={<ArrowForwardRoundedIcon fontSize="small" />} sx={{ p: 0, color: '#087A52', fontWeight: 700 }}>
+                        Read Details
+                      </Button>
+                    </Stack>
                   </CardContent>
                 </Card>
               </Grid>

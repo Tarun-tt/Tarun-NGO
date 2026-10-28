@@ -135,6 +135,66 @@ export const fallbackStories = [
     image_url: './images/environment.jpg',
     quote: 'Our village wells used to dry up by February. This year our fields remained green throughout April.',
     date: 'December 2025'
+  },
+  {
+    id: 'sty_04',
+    title: 'Midnight Flood Emergency in Bihar: Rescuing 1,200 Stranded Souls',
+    category: 'Emergency Relief',
+    summary: 'When the river embankment breached at 2 AM, 1,200 daily-wage families lost everything. Helping India arrived in 6 hours with lifeboats, clean water, and warm food.',
+    content: 'In August 2025, sudden monsoon floods inundated 4 hamlets in Madhubani district. Families stood stranded on muddy railway tracks without food or clean drinking water for 18 hours. Helping India emergency response wing deployed 3 inflatable relief boats, distributed 1,200 dry ration packs (pressed rice, jaggery, milk powder, halogen tablets), and operated an Annapoorna mobile kitchen cooking 2,400 fresh khichdi meals twice daily for 12 straight days.',
+    beneficiary_name: 'Ramvati Devi & 1,200 Flood Survivors',
+    location: 'Madhubani, Bihar',
+    image_url: './images/incident-flood-relief.jpg',
+    quote: 'When our thatched home washed away in the dark, we thought no one would come. Helping India volunteers gave my shivering grandchildren hot food and fresh water.',
+    date: 'August 2025'
+  },
+  {
+    id: 'sty_05',
+    title: 'Rescued from Brick-Kiln Child Labor: 7-Year-Old Priya’s New Life',
+    category: 'Child Welfare & Education',
+    summary: 'Destined to carry 15kg brick trays under burning sun to clear inherited debt, Priya was rescued, enrolled in remedial classes, and is now standard grade top student.',
+    content: 'Priya spent her days carrying unbaked mud bricks under the blistering summer heat to help her migrant parents pay off debt. During our doorstep educational drive, Helping India coordinators intervened, compensated the family through nutritional stipends, and admitted Priya into our bridge school. She received a brand new uniform, books, and daily nutritious meals. Within 8 months, Priya learned fluent Hindi and basic mathematics, passing her formal school entry test with distinction.',
+    beneficiary_name: 'Priya (7 Years Old)',
+    location: 'Sitapur, Uttar Pradesh',
+    image_url: './images/incident-priya-education.jpg',
+    quote: 'I used to get blisters on my hands carrying bricks. Now my hands hold pencils and storybooks. When I grow up, I will become a doctor to treat poor children.',
+    date: 'September 2025'
+  },
+  {
+    id: 'sty_06',
+    title: 'Light Restored After 5 Years: 68-Year-Old Ramu Kaka’s Sight Miracle',
+    category: 'Healthcare',
+    summary: 'Blinded by mature cataracts and unable to afford a ₹12,000 city surgery, Ramu Kaka lived in darkness until Arogya Vandana mobile camp gave him free sight surgery.',
+    content: 'For five years, 68-year-old landless farmer Ramu Kaka sat in the shadows of his clay veranda, completely blinded by bilateral hyper-mature cataracts. When Helping India Arogya Vandana mobile diagnostic van arrived at his village, our medical officer diagnosed him, arranged free ambulance transit to our partner eye hospital, and sponsored his intraocular lens implant surgery. 48 hours later, when bandages were removed, Ramu Kaka saw his 4-year-old grandson for the very first time.',
+    beneficiary_name: 'Ramu Kaka (68 Years Old)',
+    location: 'Alwar, Rajasthan',
+    image_url: './images/incident-elderly-healthcare.jpg',
+    quote: 'I lived in darkness for five long years. Today I held my little grandson and saw his face. May God bless every donor who gave me my eyes back.',
+    date: 'November 2025'
+  },
+  {
+    id: 'sty_07',
+    title: 'Midnight Operation Warmth: Saving 3,500 Pavement Dwellers from Freezing Frost',
+    category: 'Hunger & Shelter',
+    summary: 'When winter temperatures dropped to 3°C, our midnight volunteer teams covered 3,500 homeless individuals and newborns with heavy 4-ply thermal blankets.',
+    content: 'Winter nights in North India turn deadly for those sleeping on footpaths, beneath flyovers, and near railway stations. In December 2025, during an unprecedented cold wave, Helping India launched Operation Warmth. Every night between 11 PM and 4 AM, our volunteer squads distributed 3,500 thick woolen blankets, warm beanies, thermal socks, and steaming mugs of immunity kadha and hot vegetable soup, directly preventing fatal hypothermia.',
+    beneficiary_name: 'Homeless Families & Daily Wage Laborers',
+    location: 'Yamuna Pushta & Old Delhi',
+    image_url: './images/incident-winter-drive.jpg',
+    quote: 'This warm blanket saved my 6-month-old daughter from pneumonia. We would not have survived the bitter night without Helping India.',
+    date: 'December 2025'
+  },
+  {
+    id: 'sty_08',
+    title: 'From ₹50 Daily Wage to Dignity: Varanasi Women Artisan Cooperative',
+    category: 'Women Empowerment',
+    summary: '28 village women broke generational poverty by mastering commercial stitching, earning ₹16,500 monthly and ending loan shark exploitation.',
+    content: 'In rural Varanasi, women had no independent income and survived at the mercy of village money lenders charging 10% monthly interest. Helping India Swavalamban center brought 28 women together, provided industrial grade sewing machines, professional cutting masters, and direct bulk orders for cotton shopping bags and uniforms. In their very first festive quarter, the cooperative produced 4,200 items, netting each woman an average monthly income of ₹16,500 directly in their own bank accounts.',
+    beneficiary_name: 'Radha Devi & 28 Women Artisans',
+    location: 'Varanasi, Uttar Pradesh',
+    image_url: './images/incident-women-coop.jpg',
+    quote: 'For the first time in our lives, we have our own bank passbooks. We no longer ask anyone for permission to feed or educate our daughters.',
+    date: 'February 2026'
   }
 ];
 

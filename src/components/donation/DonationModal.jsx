@@ -15,11 +15,11 @@ import { formatINR } from '../../utils/formatters';
 import UPIPaymentCard from './UPIPaymentCard';
 
 const impactDescriptions = {
-  500: 'Provides a complete school learning kit and stationery for 1 child.',
-  1000: 'Funds diagnostic screenings and essential medicines for 2 rural elderly patients.',
-  2500: 'Provides wholesome daily meals and nutrition for a vulnerable family for an entire month.',
-  5000: 'Plants and nurtures 25 native trees with community groundwater pits.',
-  10000: 'Funds a vocational tailoring workstation for a woman artisan micro-entrepreneur.',
+  500: 'Rescues a child from labor (like 7-year-old Priya) with a complete school kit, books, uniform & bridge classes.',
+  1000: 'Funds diagnostic screenings and vision restoration surgery for 2 rural elders (like 68-year-old Ramu Kaka).',
+  2500: 'Sends a full month of emergency grocery rations (rice, atta, dal, oil) for stranded flood survivors in Bihar.',
+  5000: 'Supplies emergency 4-ply thermal blankets & warm porridge protecting homeless families from freezing winter.',
+  10000: 'Equips a rural mother with an industrial sewing workstation, unlocking permanent financial self-reliance.',
 };
 
 export default function DonationModal() {

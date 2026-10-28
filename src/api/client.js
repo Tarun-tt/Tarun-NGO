@@ -434,6 +434,12 @@ export const api = {
       setStorage(STORAGE_KEYS.STORIES, fallbackStories);
     } else {
       let updated = false;
+      for (const fallback of fallbackStories) {
+        if (!stories.some((s) => s.id === fallback.id)) {
+          stories.push(fallback);
+          updated = true;
+        }
+      }
       stories = stories.map((s) => {
         const fallback = fallbackStories.find((f) => f.id === s.id);
         if (fallback && (!s.image_url || s.image_url.includes('images.unsplash.com'))) {
