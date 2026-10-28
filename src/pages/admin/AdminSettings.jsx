@@ -116,7 +116,7 @@ export default function AdminSettings() {
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
-                label="Primary UPI ID (VPA) *"
+                label="Primary UPI ID (VPA)"
                 value={settings.upi_id || "tarun-tiwari@ptyes"}
                 onChange={(e) => handleChange("upi_id", e.target.value)}
                 helperText="Active UPI ID: tarun-tiwari@ptyes"

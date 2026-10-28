@@ -128,7 +128,7 @@ export default function ContactPage() {
                   <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
-                      label="Your Name *"
+                      label="Your Name"
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -139,7 +139,7 @@ export default function ContactPage() {
                   <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
-                      label="Email Address *"
+                      label="Email Address"
                       type="email"
                       value={formData.email}
                       onChange={(e) =>
@@ -173,7 +173,7 @@ export default function ContactPage() {
                       fullWidth
                       multiline
                       rows={4}
-                      label="Your Message *"
+                      label="Your Message"
                       value={formData.message}
                       onChange={(e) =>
                         setFormData({ ...formData, message: e.target.value })

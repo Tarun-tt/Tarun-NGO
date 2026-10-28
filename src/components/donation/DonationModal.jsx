@@ -1,57 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
-  Dialog, DialogTitle, DialogContent, Box, Typography, Button,
-  Grid, TextField, FormControlLabel, Checkbox, Stack, Chip,
-  Divider, Alert, IconButton, CircularProgress
-} from '@mui/material';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
-import ShieldRoundedIcon from '@mui/icons-material/ShieldRounded';
-import QrCodeRoundedIcon from '@mui/icons-material/QrCodeRounded';
-import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
-import { useDonation } from '../../context/DonationContext';
-import { api } from '../../api/client';
-import { formatINR } from '../../utils/formatters';
-import UPIPaymentCard from './UPIPaymentCard';
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Box,
+  Typography,
+  Button,
+  Grid,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Stack,
+  Chip,
+  Divider,
+  Alert,
+  IconButton,
+  CircularProgress,
+} from "@mui/material";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import ShieldRoundedIcon from "@mui/icons-material/ShieldRounded";
+import QrCodeRoundedIcon from "@mui/icons-material/QrCodeRounded";
+import LaunchRoundedIcon from "@mui/icons-material/LaunchRounded";
+import { useDonation } from "../../context/DonationContext";
+import { api } from "../../api/client";
+import { formatINR } from "../../utils/formatters";
+import UPIPaymentCard from "./UPIPaymentCard";
 
 const impactDescriptions = {
-  500: 'Rescues a child from labor (like 7-year-old Priya) with a complete school kit, books, uniform & bridge classes.',
-  1000: 'Funds diagnostic screenings and vision restoration surgery for 2 rural elders (like 68-year-old Ramu Kaka).',
-  2500: 'Sends a full month of emergency grocery rations (rice, atta, dal, oil) for stranded flood survivors in Bihar.',
-  5000: 'Supplies emergency 4-ply thermal blankets & warm porridge protecting homeless families from freezing winter.',
-  10000: 'Equips a rural mother with an industrial sewing workstation, unlocking permanent financial self-reliance.',
+  500: "Rescues a child from labor (like 7-year-old Priya) with a complete school kit, books, uniform & bridge classes.",
+  1000: "Funds diagnostic screenings and vision restoration surgery for 2 rural elders (like 68-year-old Ramu Kaka).",
+  2500: "Sends a full month of emergency grocery rations (rice, atta, dal, oil) for stranded flood survivors in Bihar.",
+  5000: "Supplies emergency 4-ply thermal blankets & warm porridge protecting homeless families from freezing winter.",
+  10000:
+    "Equips a rural mother with an industrial sewing workstation, unlocking permanent financial self-reliance.",
 };
 
 export default function DonationModal() {
   const { modalState, closeDonationModal, showReceipt } = useDonation();
-  const { isOpen, campaignId: initialCampaignId, campaignTitle: initialCampaignTitle, presetAmount } = modalState;
+  const {
+    isOpen,
+    campaignId: initialCampaignId,
+    campaignTitle: initialCampaignTitle,
+    presetAmount,
+  } = modalState;
 
   const [campaigns, setCampaigns] = useState([]);
-  const [selectedCampaignId, setSelectedCampaignId] = useState(initialCampaignId || '');
-  const [selectedCampaignTitle, setSelectedCampaignTitle] = useState(initialCampaignTitle || 'General NGO Fund');
+  const [selectedCampaignId, setSelectedCampaignId] = useState(
+    initialCampaignId || "",
+  );
+  const [selectedCampaignTitle, setSelectedCampaignTitle] = useState(
+    initialCampaignTitle || "General NGO Fund",
+  );
   const [amount, setAmount] = useState(presetAmount || 1000);
-  const [customAmount, setCustomAmount] = useState('');
+  const [customAmount, setCustomAmount] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showQrDetails, setShowQrDetails] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    pan: '',
-    address: '',
+    name: "",
+    email: "",
+    phone: "",
+    pan: "",
+    address: "",
     isAnonymous: false,
-    notes: '',
+    notes: "",
   });
 
   useEffect(() => {
     if (isOpen) {
-      setSelectedCampaignId(initialCampaignId || '');
-      setSelectedCampaignTitle(initialCampaignTitle || 'General NGO Fund');
+      setSelectedCampaignId(initialCampaignId || "");
+      setSelectedCampaignTitle(initialCampaignTitle || "General NGO Fund");
       setAmount(presetAmount || 1000);
-      setCustomAmount('');
-      setError('');
+      setCustomAmount("");
+      setError("");
       setShowQrDetails(false);
 
       api.getCampaigns().then(setCampaigns).catch(console.warn);
@@ -62,8 +85,8 @@ export default function DonationModal() {
 
   const handleAmountSelect = (val) => {
     setAmount(val);
-    setCustomAmount('');
-    setError('');
+    setCustomAmount("");
+    setError("");
   };
 
   const handleCustomAmountChange = (e) => {
@@ -77,16 +100,18 @@ export default function DonationModal() {
 
   const handlePayAndRedirectUpi = async () => {
     if (!formData.name.trim() || !formData.email.trim()) {
-      setError('Please provide your name and email address to receive your official 80G tax receipt.');
+      setError(
+        "Please provide your name and email address to receive your official 80G tax receipt.",
+      );
       return;
     }
     if (amount < 50) {
-      setError('Minimum donation amount is ₹50.');
+      setError("Minimum donation amount is ₹50.");
       return;
     }
 
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
       const upiUrl = `upi://pay?pa=tarun-tiwari@ptyes&pn=Tarun%20Tiwari&am=${amount}&cu=INR&tn=${encodeURIComponent(`Donation - ${selectedCampaignTitle}`)}`;
@@ -100,7 +125,7 @@ export default function DonationModal() {
         donor_phone: formData.phone.trim() || null,
         donor_pan: formData.pan.trim() || null,
         address: formData.address.trim() || null,
-        upi_utr: 'UPI-DIRECT',
+        upi_utr: "UPI-DIRECT",
         is_anonymous: formData.isAnonymous,
         notes: formData.notes.trim() || null,
       });
@@ -112,7 +137,7 @@ export default function DonationModal() {
       closeDonationModal();
       showReceipt(res.receipt);
     } catch (err) {
-      setError(err.message || 'Payment initiation failed.');
+      setError(err.message || "Payment initiation failed.");
     } finally {
       setLoading(false);
     }
@@ -120,11 +145,11 @@ export default function DonationModal() {
 
   const handleUtrVerified = async (utrNumber) => {
     if (!formData.name.trim() || !formData.email.trim()) {
-      setError('Please provide your name and email address.');
+      setError("Please provide your name and email address.");
       return;
     }
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const res = await api.submitUpiPayment({
         campaign_id: selectedCampaignId || null,
@@ -143,7 +168,7 @@ export default function DonationModal() {
       closeDonationModal();
       showReceipt(res.receipt);
     } catch (err) {
-      setError(err.message || 'Failed to submit verification.');
+      setError(err.message || "Failed to submit verification.");
     } finally {
       setLoading(false);
     }
@@ -151,35 +176,69 @@ export default function DonationModal() {
 
   return (
     <Dialog open={isOpen} onClose={closeDonationModal} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ m: 0, p: 2.5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <DialogTitle
+        sx={{
+          m: 0,
+          p: 2.5,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Stack direction="row" spacing={1} alignItems="center">
-          <Box sx={{ width: 36, height: 36, borderRadius: '50%', bgcolor: '#E4F6ED', display: 'grid', placeItems: 'center', color: '#087A52' }}>
+          <Box
+            sx={{
+              width: 36,
+              height: 36,
+              borderRadius: "50%",
+              bgcolor: "#E4F6ED",
+              display: "grid",
+              placeItems: "center",
+              color: "#087A52",
+            }}
+          >
             <FavoriteRoundedIcon fontSize="small" />
           </Box>
           <Box>
-            <Typography variant="h6" fontWeight={800} color="#172B3A" lineHeight={1.2}>
+            <Typography
+              variant="h6"
+              fontWeight={800}
+              color="#172B3A"
+              lineHeight={1.2}
+            >
               Support Helping India
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              Direct UPI: <strong>tarun-tiwari@ptyes</strong> · 50% Tax Exemption
+              Direct UPI: <strong>tarun-tiwari@ptyes</strong> · 50% Tax
+              Exemption
             </Typography>
           </Box>
         </Stack>
-        <IconButton onClick={closeDonationModal} size="small" aria-label="close">
+        <IconButton
+          onClick={closeDonationModal}
+          size="small"
+          aria-label="close"
+        >
           <CloseRoundedIcon />
         </IconButton>
       </DialogTitle>
 
       <DialogContent dividers sx={{ p: { xs: 2, sm: 3 } }}>
         {error && (
-          <Alert severity="error" sx={{ mb: 2.5 }} onClose={() => setError('')}>
+          <Alert severity="error" sx={{ mb: 2.5 }} onClose={() => setError("")}>
             {error}
           </Alert>
         )}
 
         {/* Step 1: Cause Selector */}
         <Box mb={2.5}>
-          <Typography variant="caption" fontWeight={700} color="text.secondary" display="block" mb={0.8}>
+          <Typography
+            variant="caption"
+            fontWeight={700}
+            color="text.secondary"
+            display="block"
+            mb={0.8}
+          >
             1. SELECT INITIATIVE TO SUPPORT
           </Typography>
           <TextField
@@ -191,7 +250,9 @@ export default function DonationModal() {
               const id = e.target.value;
               setSelectedCampaignId(id);
               const found = campaigns.find((c) => c.id === id);
-              setSelectedCampaignTitle(found ? found.title : 'General NGO Fund');
+              setSelectedCampaignTitle(
+                found ? found.title : "General NGO Fund",
+              );
             }}
             SelectProps={{ native: true }}
           >
@@ -206,7 +267,13 @@ export default function DonationModal() {
 
         {/* Step 2: Amount Selector */}
         <Box mb={2.5}>
-          <Typography variant="caption" fontWeight={700} color="text.secondary" display="block" mb={1}>
+          <Typography
+            variant="caption"
+            fontWeight={700}
+            color="text.secondary"
+            display="block"
+            mb={1}
+          >
             2. CHOOSE DONATION AMOUNT
           </Typography>
           <Grid container spacing={1} mb={1.5}>
@@ -214,15 +281,19 @@ export default function DonationModal() {
               <Grid item xs={4} sm key={val}>
                 <Button
                   fullWidth
-                  variant={amount === val && !customAmount ? 'contained' : 'outlined'}
-                  color={amount === val && !customAmount ? 'primary' : 'inherit'}
+                  variant={
+                    amount === val && !customAmount ? "contained" : "outlined"
+                  }
+                  color={
+                    amount === val && !customAmount ? "primary" : "inherit"
+                  }
                   onClick={() => handleAmountSelect(val)}
                   sx={{
                     py: 1,
                     px: 0.5,
-                    fontSize: '0.88rem',
+                    fontSize: "0.88rem",
                     fontWeight: 800,
-                    borderColor: '#D4E2DA',
+                    borderColor: "#D4E2DA",
                   }}
                 >
                   {formatINR(val)}
@@ -239,13 +310,30 @@ export default function DonationModal() {
             value={customAmount}
             onChange={handleCustomAmountChange}
             InputProps={{
-              startAdornment: <Typography sx={{ mr: 1, color: '#087A52', fontWeight: 800 }}>₹</Typography>,
+              startAdornment: (
+                <Typography sx={{ mr: 1, color: "#087A52", fontWeight: 800 }}>
+                  ₹
+                </Typography>
+              ),
             }}
           />
 
           {impactDescriptions[amount] && (
-            <Box sx={{ mt: 1.5, p: 1.5, bgcolor: '#F0F9F4', borderRadius: 2, border: '1px solid #D1EADE' }}>
-              <Typography variant="caption" color="#087A52" fontWeight={600} display="block">
+            <Box
+              sx={{
+                mt: 1.5,
+                p: 1.5,
+                bgcolor: "#F0F9F4",
+                borderRadius: 2,
+                border: "1px solid #D1EADE",
+              }}
+            >
+              <Typography
+                variant="caption"
+                color="#087A52"
+                fontWeight={600}
+                display="block"
+              >
                 ✨ <strong>Your impact:</strong> {impactDescriptions[amount]}
               </Typography>
             </Box>
@@ -254,7 +342,13 @@ export default function DonationModal() {
 
         {/* Step 3: Donor Details */}
         <Box mb={3}>
-          <Typography variant="caption" fontWeight={700} color="text.secondary" display="block" mb={1}>
+          <Typography
+            variant="caption"
+            fontWeight={700}
+            color="text.secondary"
+            display="block"
+            mb={1}
+          >
             3. DONOR DETAILS (FOR OFFICIAL 80G RECEIPT)
           </Typography>
           <Grid container spacing={1.5}>
@@ -262,9 +356,11 @@ export default function DonationModal() {
               <TextField
                 fullWidth
                 size="small"
-                label="Full Name *"
+                label="Full Name"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 required
               />
             </Grid>
@@ -272,10 +368,12 @@ export default function DonationModal() {
               <TextField
                 fullWidth
                 size="small"
-                label="Email Address *"
+                label="Email Address"
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 required
               />
             </Grid>
@@ -285,7 +383,9 @@ export default function DonationModal() {
                 size="small"
                 label="Mobile Number (Optional)"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -295,7 +395,12 @@ export default function DonationModal() {
                 label="PAN Number (Optional for 80G)"
                 placeholder="ABCDE1234F"
                 value={formData.pan}
-                onChange={(e) => setFormData({ ...formData, pan: e.target.value.toUpperCase() })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    pan: e.target.value.toUpperCase(),
+                  })
+                }
                 helperText="Required for Section 80G tax benefit certificate"
               />
             </Grid>
@@ -306,7 +411,9 @@ export default function DonationModal() {
               <Checkbox
                 size="small"
                 checked={formData.isAnonymous}
-                onChange={(e) => setFormData({ ...formData, isAnonymous: e.target.checked })}
+                onChange={(e) =>
+                  setFormData({ ...formData, isAnonymous: e.target.checked })
+                }
               />
             }
             label={
@@ -320,7 +427,13 @@ export default function DonationModal() {
 
         {/* Step 4: Pay to tarun-tiwari@ptyes */}
         <Box mb={2}>
-          <Typography variant="caption" fontWeight={700} color="text.secondary" display="block" mb={1}>
+          <Typography
+            variant="caption"
+            fontWeight={700}
+            color="text.secondary"
+            display="block"
+            mb={1}
+          >
             4. PAY DIRECTLY VIA UPI (GOOGLE PAY, PHONEPE, PAYTM, BHIM)
           </Typography>
 
@@ -334,14 +447,18 @@ export default function DonationModal() {
             endIcon={<LaunchRoundedIcon />}
             sx={{
               py: 1.5,
-              fontSize: '1.05rem',
+              fontSize: "1.05rem",
               fontWeight: 800,
-              background: 'linear-gradient(135deg, #F59E0B 0%, #D97706 100%)',
-              boxShadow: '0 6px 20px rgba(245, 158, 11, 0.35)',
+              background: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+              boxShadow: "0 6px 20px rgba(245, 158, 11, 0.35)",
               mb: 1.5,
             }}
           >
-            {loading ? <CircularProgress size={24} color="inherit" /> : `Pay ${formatINR(amount)} to tarun-tiwari@ptyes`}
+            {loading ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              `Pay ${formatINR(amount)} to tarun-tiwari@ptyes`
+            )}
           </Button>
 
           <Button
@@ -349,9 +466,11 @@ export default function DonationModal() {
             size="small"
             fullWidth
             onClick={() => setShowQrDetails(!showQrDetails)}
-            sx={{ color: '#087A52', fontWeight: 700 }}
+            sx={{ color: "#087A52", fontWeight: 700 }}
           >
-            {showQrDetails ? 'Hide QR Code & Bank Account' : 'Show QR Code & Yes Bank Account Details'}
+            {showQrDetails
+              ? "Hide QR Code & Bank Account"
+              : "Show QR Code & Yes Bank Account Details"}
           </Button>
         </Box>
 
@@ -370,8 +489,14 @@ export default function DonationModal() {
           </Box>
         )}
 
-        <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" sx={{ mt: 2.5, color: '#526677' }}>
-          <ShieldRoundedIcon sx={{ fontSize: 16, color: '#087A52' }} />
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          justifyContent="center"
+          sx={{ mt: 2.5, color: "#526677" }}
+        >
+          <ShieldRoundedIcon sx={{ fontSize: 16, color: "#087A52" }} />
           <Typography variant="caption">
             Direct UPI to Tarun Tiwari · Verified Indian Public Charitable Trust
           </Typography>
